@@ -79,17 +79,15 @@ def clean_history(filepath, show_top=False, danger=False):
         print(f"✅ SAFE MODE: Cleaned file saved to {output_path}")
         print("💡 Run with --danger if you trust it and want to replace your real history.")
 
-if __name__ == "__main__":
-    # This is where we handle the commands the user types (like --top10)
+def main():
     parser = argparse.ArgumentParser(description="HistClean: Declutter your terminal history.")
     parser.add_argument("--top10", action="store_true", help="Show your most used commands.")
     parser.add_argument("--danger", action="store_true", help="Overwrite the actual history file.")
     parser.add_argument("--file", help="Manually specify a history file path.")
     
     args = parser.parse_args()
-    
-    # Determine which history file to use
     history_file = args.file if args.file else get_history_path()
-    
-    # Run the cleaner
     clean_history(history_file, show_top=args.top10, danger=args.danger)
+
+if __name__ == "__main__":
+    main()
